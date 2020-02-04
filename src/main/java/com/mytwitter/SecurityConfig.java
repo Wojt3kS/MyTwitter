@@ -19,6 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/application/**").authenticated()
                 .and().formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/application")
                 .and().logout().logoutSuccessUrl("/")
                 .permitAll()
                 .and().exceptionHandling().accessDeniedPage("/403");

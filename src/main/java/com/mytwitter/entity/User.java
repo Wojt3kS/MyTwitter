@@ -4,6 +4,7 @@ package com.mytwitter.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @NotBlank
     private String username;
     @Column(nullable = false)
@@ -25,18 +26,18 @@ public class User {
     @Column(nullable = false)
     @NotBlank
     private String password;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @NotBlank
     @Email
     private String email;
     @OneToMany(mappedBy = "user")
-    private List<Tweet> tweets;
+    private List<Tweet> tweets = new ArrayList<>();
     @OneToMany(mappedBy = "user")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
     @OneToMany(mappedBy = "fromUser")
-    private List<Message> messagesFromMe;
+    private List<Message> messagesFromMe = new ArrayList<>();
     @OneToMany(mappedBy = "toUser")
-    private List<Message> messagesToMe;
+    private List<Message> messagesToMe = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

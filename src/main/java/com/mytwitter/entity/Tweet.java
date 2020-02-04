@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class Tweet {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "tweet")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     public long getId() {
         return id;
