@@ -35,7 +35,7 @@
             <div class="m-4 p-4 border-dashed">
                 Add tweet
                 <form:form modelAttribute="tweet" method="post" action="/tweet/add">
-                    <form:input path="text" size="30" lang="5"/><br>
+                    <form:input path="text" size="140"/><br>
                     <form:errors path="text" cssClass="error"/>
                     <input type="hidden" name="jspAddress" value="/application/my-tweets">
                     <input type="submit" value="Tweet it">
@@ -49,6 +49,12 @@
                     <c:forEach items="${tweet.comments}" var="comment">
                         <c:out value="${comment.formattedTime} ${comment.user.username}: ${comment.text}"/><br>
                     </c:forEach>
+                    Add comment:
+                    <form:form modelAttribute="comment" method="post" action="/comment/add/${tweet.id}">
+                        <form:input path="text" size="140"/>
+                        <form:errors path="text" cssClass="error"/>
+                        <input type="submit" value="Comment">
+                    </form:form>
                 </div>
             </c:forEach>
         </div>

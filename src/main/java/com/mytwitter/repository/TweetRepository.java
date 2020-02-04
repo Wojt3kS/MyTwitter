@@ -8,4 +8,5 @@ import java.util.List;
 public interface TweetRepository extends JpaRepository<Tweet, Integer> {
 
     List<Tweet> findAllByUserId(long id);
+    Tweet getById(long id);
 }
