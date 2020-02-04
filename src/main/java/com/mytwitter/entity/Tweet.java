@@ -1,17 +1,19 @@
 package com.mytwitter.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "tweets")
-public class Tweet {
+public class Tweet implements Comparable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -55,6 +57,19 @@ public class Tweet {
         return created;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public String getFormattedTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return created.format(formatter);
+    }
+
     public void setCreated(LocalDateTime created) {
         this.created = created;
     }
@@ -67,5 +82,17 @@ public class Tweet {
                 ", text='" + text + '\'' +
                 ", created=" + created +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Tweet toCompare = (Tweet) o;
+        if (this.created.isBefore(toCompare.created)){
+            return 1;
+        } else if (!this.created.isBefore(toCompare.created)){
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }

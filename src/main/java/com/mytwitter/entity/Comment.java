@@ -7,10 +7,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "comments")
-public class Comment {
+public class Comment implements Comparable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -67,6 +68,11 @@ public class Comment {
         this.user = user;
     }
 
+    public String getFormattedTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return created.format(formatter);
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
@@ -76,5 +82,17 @@ public class Comment {
                 ", tweet=" + tweet +
                 ", user=" + user +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Comment toCompare = (Comment) o;
+        if (this.created.isBefore(toCompare.created)){
+            return -1;
+        } else if (!this.created.isBefore(toCompare.created)){
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
