@@ -1,6 +1,7 @@
 package com.mytwitter.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -22,8 +23,9 @@ public class Tweet implements Comparable {
     @Size(max = 140)
     private String text;
     @CreationTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime created;
-    @NotNull
+    //@NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "tweet")

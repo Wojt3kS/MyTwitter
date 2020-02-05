@@ -23,27 +23,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/create-user")
-    @ResponseBody
-    public String createUser() {
-        User user = new User();
-        user.setUsername("admin");
-        user.setFirstName("admin");
-        user.setLastName("admin");
-        user.setPassword("admin");
-        user.setEmail("admin@admin.com");
-        userService.saveUser(user);
-        return "admin";
-    }
-
-    @GetMapping("/admin")
-    @ResponseBody
-    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
-        User entityUser = customUser.getUser();
-        return "Hello " + entityUser.toString();
-    }
-
-
     @GetMapping("/registration")
     public String registrationForm(Model model){
         User user = new User();

@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -25,18 +26,18 @@ public class CommentController {
         this.tweetRepository = tweetRepository;
     }
 
-    @PostMapping("/add/{id}")
-    public String saveComment(@PathVariable long id, @Valid Comment comment, BindingResult bindingResult, @AuthenticationPrincipal CurrentUser customUser){
+    @PostMapping("/add/{idpost}")
+    public String saveComment(@PathVariable long idpost, @Valid Comment comment, BindingResult bindingResult,
+                              @RequestParam String jspAddress, @AuthenticationPrincipal CurrentUser customUser){
 //        if (bindingResult.hasErrors()) {
 //            System.out.println(bindingResult.getAllErrors().toString());
 //            return "/application/tweets";
 //        }
-        //Skąd ma id?
-        comment.setTweet(tweetRepository.getById(id));
+        comment.setTweet(tweetRepository.getById(idpost));
         comment.setUser(customUser.getUser());
-        comment.setId(0);
+
         commentRepository.save(comment);
-        return "redirect:/application/tweets";
+        return "redirect:" + jspAddress;
     }
 
 }

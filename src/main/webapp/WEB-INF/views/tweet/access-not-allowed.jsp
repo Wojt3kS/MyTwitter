@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Application home</title>
+    <title>Tweet details</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
@@ -13,9 +13,7 @@
     <link href='<c:url value="/application.css"/>' rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
 </head>
-
 <body>
 <header class="page-header">
     <nav class="navbar navbar-expand-lg justify-content-between">
@@ -30,37 +28,13 @@
 </header>
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
-        <%@ include file="side-nav.jsp" %>
+        <%@ include file="../application/side-nav.jsp" %>
         <div class="m-4 p-4 width-medium">
             <div class="m-4 p-4 border-dashed">
-                Add tweet
-                <form:form modelAttribute="tweet" method="post" action="/tweet/add">
-                    <form:input path="text" size="80"/><br>
-                    <form:errors path="text" cssClass="error"/>
-                    <input type="hidden" name="jspAddress" value="/application/my-tweets">
-                    <input type="submit" value="Tweet it">
-                </form:form>
+                <h2 class="dashboard-content-title">
+                    <span>You can't edit/delete other user tweet!</span>
+                </h2>
             </div>
-            <c:forEach items="${myTweets}" var="tweet">
-                <div class="m-4 p-4 border-dashed">
-                    <p align="right">
-                        <button type="button" onClick="javascript:document.location.href='/tweet/${tweet.id}'">Details</button>
-                    </p>
-                    <c:out value="${tweet.formattedTime}"/><br>
-                    <c:out value="${tweet.user.username}: ${tweet.text}"/><br>
-                    <c:out value="Comments:"/><br>
-                    <c:forEach items="${tweet.comments}" var="comment">
-                        <c:out value="${comment.formattedTime} ${comment.user.username}: ${comment.text}"/><br>
-                    </c:forEach>
-                    Add comment:
-                    <form:form modelAttribute="comment" method="post" action="/comment/add/${tweet.id}">
-                        <form:input path="text" size="80"/>
-                        <form:errors path="text" cssClass="error"/>
-                        <input type="hidden" name="jspAddress" value="/application/my-tweets">
-                        <input type="submit" value="Comment">
-                    </form:form>
-                </div>
-            </c:forEach>
         </div>
     </div>
 </section>

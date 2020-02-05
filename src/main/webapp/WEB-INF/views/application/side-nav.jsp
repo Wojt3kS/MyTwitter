@@ -6,25 +6,25 @@
 <ul class="nav flex-column long-bg">
     <li class="nav-item">
         <a class="nav-link" href='<c:url value = "/application/my-tweets"/>'>
-            <span>Moje tweety</span>
+            <span>My tweets</span>
             <i class="fas fa-angle-right"></i>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href='<c:url value = "/application/tweets"/>'>
-            <span>Wszystkie tweety</span>
+            <span>All tweets</span>
             <i class="fas fa-angle-right"></i>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href='<c:url value = "/app/plan/list"/>'>
-            <span>Wiadomosci</span>
+            <span>Messeges</span>
             <i class="fas fa-angle-right"></i>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/app/edit/user/data">
-            <span>Edytuj dane</span>
+            <span>Edit user</span>
             <i class="fas fa-angle-right"></i>
         </a>
     </li>
