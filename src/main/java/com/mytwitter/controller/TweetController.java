@@ -1,5 +1,6 @@
 package com.mytwitter.controller;
 
+import com.mytwitter.entity.Comment;
 import com.mytwitter.entity.Tweet;
 import com.mytwitter.entity.User;
 import com.mytwitter.repository.CommentRepository;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/tweet")
@@ -32,6 +35,30 @@ public class TweetController {
         User user = customUser.getUser();
 
         return user;
+    }
+
+    @ModelAttribute("comment")
+    public Comment getComment(@AuthenticationPrincipal CurrentUser customUser) {
+        User user = customUser.getUser();
+        Comment comment = new Comment();
+        comment.setUser(user);
+        return comment;
+    }
+
+    @ModelAttribute("tweets")
+    public List<Tweet> getTweets() {
+        List<Tweet> tweets = tweetRepository.findAll();
+        Collections.sort(tweets);
+        tweets.forEach(t -> Collections.sort(t.getComments()));
+        return tweets;
+    }
+
+    @ModelAttribute("myTweets")
+    public List<Tweet> getMyTweets(@AuthenticationPrincipal CurrentUser customUser) {
+        List<Tweet> myTweets = tweetRepository.findAllByUserId(customUser.getUser().getId());
+        Collections.sort(myTweets);
+        myTweets.forEach(t -> Collections.sort(t.getComments()));
+        return myTweets;
     }
 
     @PostMapping("/add")

@@ -40,7 +40,7 @@
                 Add tweet
                 <form:form modelAttribute="tweet" method="post" action="/tweet/add">
                     <form:input path="text" size="80"/><br>
-                    <form:errors path="text" cssClass="error"/>
+                    <form:errors path="text" cssClass="error"/><br>
                     <input type="hidden" name="jspAddress" value="/application/my-tweets">
                     <input type="submit" value="Tweet it">
                 </form:form>
@@ -58,8 +58,8 @@
                     </c:forEach>
                     Add comment:
                     <form:form modelAttribute="comment" method="post" action="/comment/add/${tweet.id}">
-                        <form:input path="text" size="80"/>
-                        <form:errors path="text" cssClass="error"/>
+                        <form:input path="text" size="80"/><br>
+                        <form:errors path="text" cssClass="error"/><br>
                         <input type="hidden" name="jspAddress" value="/application/my-tweets">
                         <input type="submit" value="Comment">
                     </form:form>

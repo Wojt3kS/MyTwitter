@@ -71,6 +71,22 @@ public class ApplicationController {
         return allUsers;
     }
 
+    @ModelAttribute("tweets")
+    public List<Tweet> getTweets() {
+        List<Tweet> tweets = tweetRepository.findAll();
+        Collections.sort(tweets);
+        tweets.forEach(t -> Collections.sort(t.getComments()));
+        return tweets;
+    }
+
+    @ModelAttribute("myTweets")
+    public List<Tweet> getMyTweets(@AuthenticationPrincipal CurrentUser customUser) {
+        List<Tweet> myTweets = tweetRepository.findAllByUserId(customUser.getUser().getId());
+        Collections.sort(myTweets);
+        myTweets.forEach(t -> Collections.sort(t.getComments()));
+        return myTweets;
+    }
+
 
     @GetMapping("")
     public String home() {
@@ -78,20 +94,12 @@ public class ApplicationController {
     }
 
     @GetMapping("/tweets")
-    public String getTweets(Model model) {
-        List<Tweet> tweets = tweetRepository.findAll();
-        Collections.sort(tweets);
-        tweets.forEach(t -> Collections.sort(t.getComments()));
-        model.addAttribute("tweets", tweets);
+    public String getTweetsList() {
         return "application/tweets";
     }
 
     @GetMapping("/my-tweets")
-    public String getMyTweets(Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        List<Tweet> myTweets = tweetRepository.findAllByUserId(customUser.getUser().getId());
-        Collections.sort(myTweets);
-        myTweets.forEach(t -> Collections.sort(t.getComments()));
-        model.addAttribute("myTweets", myTweets);
+    public String getMyTweetsList() {
         return "application/my-tweets";
     }
 

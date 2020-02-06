@@ -17,7 +17,12 @@
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Sign In</h5>
-                    <form class="form-signin" method="post" />
+                    <c:if test="${not empty param.error}">
+                        <div>
+                            Invalid username or/and password
+                        </div>
+                    </c:if>
+                    <form class="form-signin" method="post"/>
                         <div class="form-label-group">
                             <input type="text" id="inputEmail" class="form-control" placeholder="Username" name="username" required autofocus>
                             <label for="inputEmail">Username</label>

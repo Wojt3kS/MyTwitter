@@ -25,8 +25,7 @@ public class Tweet implements Comparable {
     @CreationTimestamp
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime created;
-    //@NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private User user;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "tweet")
     private List<Comment> comments = new ArrayList<>();
