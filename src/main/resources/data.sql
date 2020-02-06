@@ -18,3 +18,9 @@ INSERT INTO comments (created, text, tweet_id, user_id) VALUES ('2020-02-01 17:2
 INSERT INTO comments (created, text, tweet_id, user_id) VALUES ('2020-02-02 17:28:38', 'Comment 6', 3, 2);
 INSERT INTO comments (created, text, tweet_id, user_id) VALUES ('2020-02-03 17:28:38', 'Comment 7', 4, 2);
 INSERT INTO comments (created, text, tweet_id, user_id) VALUES ('2020-02-04 17:28:38', 'Comment 8', 4, 2);
+INSERT INTO messages (created, is_readed, text, from_user_id, to_user_id ) VALUES ('2020-02-04 17:28:38', 0,'My super message 1 abcdefghijklmnoprstuwxyz', 1, 1);
+INSERT INTO messages (created, is_readed, text, from_user_id, to_user_id ) VALUES ('2020-02-04 17:28:38', 0,'My super message 2 abcdefghijklmnoprstuwxyz', 1, 2);
+INSERT INTO messages (created, is_readed, text, from_user_id, to_user_id ) VALUES ('2020-02-04 17:28:38', 0,'My super message 3 abcdefghijklmnoprstuwxyz', 2, 1);
+INSERT INTO messages (created, is_readed, text, from_user_id, to_user_id ) VALUES ('2020-02-04 17:28:38', 0,'My super message 4 abcdefghijklmnoprstuwxyz', 2, 2);
+INSERT INTO messages (created, is_readed, text, from_user_id, to_user_id ) VALUES ('2020-02-04 17:28:38', 0,'My super message 5 abcdefghijklmnoprstuwxyz', 1, 2);
+INSERT INTO messages (created, is_readed, text, from_user_id, to_user_id ) VALUES ('2020-02-04 17:28:38', 0,'My super message 6 abcdefghijklmnoprstuwxyz', 2, 1);

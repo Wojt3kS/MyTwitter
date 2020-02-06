@@ -1,6 +1,7 @@
 package com.mytwitter.controller;
 
 import com.mytwitter.entity.Tweet;
+import com.mytwitter.entity.User;
 import com.mytwitter.repository.CommentRepository;
 import com.mytwitter.repository.TweetRepository;
 import com.mytwitter.service.CurrentUser;
@@ -26,6 +27,13 @@ public class TweetController {
         this.commentRepository = commentRepository;
     }
 
+    @ModelAttribute("user")
+    public User getUser(@AuthenticationPrincipal CurrentUser customUser) {
+        User user = customUser.getUser();
+
+        return user;
+    }
+
     @PostMapping("/add")
     public String saveTweet(@AuthenticationPrincipal CurrentUser customUser, @RequestParam String jspAddress,
                             @Valid Tweet tweet, BindingResult bindingResult) {
@@ -42,7 +50,7 @@ public class TweetController {
     public String getTweetDetails(@PathVariable long id, Model model) {
         Tweet tweet = tweetRepository.getById(id);
         model.addAttribute("tweet", tweet);
-        return "/tweet/details";
+        return "tweet/details";
     }
 
     @RequestMapping("/edit/{id}")
@@ -52,7 +60,7 @@ public class TweetController {
             return "/tweet/access-not-allowed";
         }
         model.addAttribute("tweet", tweet);
-        return "/tweet/edit";
+        return "tweet/edit";
     }
 
     @PostMapping("/edit")
@@ -72,7 +80,7 @@ public class TweetController {
     public String deleteTweet(@PathVariable long id, @AuthenticationPrincipal CurrentUser customUser) {
         Tweet tweet = tweetRepository.getById(id);
         if (!customUser.getUser().getUsername().equals(tweet.getUser().getUsername())) {
-            return "/tweet/access-not-allowed";
+            return "tweet/access-not-allowed";
         }
         commentRepository.deleteAllByTweet(tweet);
         tweetRepository.delete(tweet);

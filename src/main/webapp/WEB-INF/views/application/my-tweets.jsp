@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Application home</title>
+    <title>My Tweets</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
@@ -25,6 +25,10 @@
         <div class="d-flex justify-content-around">
             <h4 class="text-light mr-3">${user.username}</h4>
             <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
+            <form action="<c:url value="/logout"/>" method="post">
+                <input class="fa fa-id-badge" type="submit" value="Logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
         </div>
     </nav>
 </header>

@@ -17,13 +17,13 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href='<c:url value = "/app/plan/list"/>'>
+        <a class="nav-link" href='<c:url value = "/application/messages"/>'>
             <span>Messeges</span>
             <i class="fas fa-angle-right"></i>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/app/edit/user/data">
+        <a class="nav-link" href="/user/edit">
             <span>Edit user</span>
             <i class="fas fa-angle-right"></i>
         </a>

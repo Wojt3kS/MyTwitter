@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
-    //@Query("delete from Comment c where c.tweet = :tweet")
     @Transactional
     @Modifying
     void deleteAllByTweet(Tweet tweet);

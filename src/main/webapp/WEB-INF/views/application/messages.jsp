@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tweets</title>
+    <title>Messages</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
@@ -37,35 +37,33 @@
         <%@ include file="side-nav.jsp" %>
         <div class="m-4 p-4 width-medium">
             <div class="m-4 p-4 border-dashed">
-                Add tweet
-                <form:form modelAttribute="tweet" method="post" action="/tweet/add">
-                    <form:input path="text" size="80"/>
+                Send message:
+                <form:form modelAttribute="message" method="post" action="/message/add">
+                    <form:input path="text" size="80"/><br>
                     <form:errors path="text" cssClass="error"/>
-                    <input type="hidden" name="jspAddress" value="/application/tweets">
-                    <br>
-                    <input type="submit" value="Tweet it">
+                    <form:select path="toUser" items="${users}" itemValue="id" itemLabel="username"
+                                 multiple="false"/><br>
+                    <input type="submit" value="Send">
                 </form:form>
             </div>
-            <c:forEach items="${tweets}" var="tweet">
+            <c:forEach items="${messages}" var="message">
                 <div class="m-4 p-4 border-dashed">
-                    <p align="right">
-                        <button type="button" onClick="javascript:document.location.href='/tweet/${tweet.id}'">Details</button>
-                    </p>
-                    <c:out value="${tweet.formattedTime}"/><br>
-                    <c:out value="${tweet.user.username}: ${tweet.text}"/><br>
-                    <c:out value="Comments:"/><br>
-                    <c:forEach items="${tweet.comments}" var="comment">
-                        <c:out value="${comment.formattedTime} ${comment.user.username}: ${comment.text}"/><br>
-                    </c:forEach>
-                    Add comment:
-                    <form:form modelAttribute="comment" method="post" action="/comment/add/${tweet.id}">
-                        <form:input path="text" size="80"/>
-                        <form:errors path="text" cssClass="error"/>
-                        <input type="hidden" name="jspAddress" value="/application/tweets">
-                        <input type="submit" value="Comment">
-                    </form:form>
-                </div>
+                    <c:if test="${message.readed == false}">
+                    <b>
+                        </c:if>
 
+                        <c:out value="${message.formattedTime}"/><br>
+                        <c:out value="${message.fromUser.username}: ${tweet.text}"/><br>
+                        <c:out value="${message.text}"/><br>
+                        <c:if test="${message.readed == false}">
+                    </b>
+                    </c:if>
+                    <p>
+                        <button type="button" onClick="javascript:document.location.href='/message/${message.id}'">
+                            read
+                        </button>
+                    </p>
+                </div>
             </c:forEach>
         </div>
     </div>

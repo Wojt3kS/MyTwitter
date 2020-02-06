@@ -28,6 +28,10 @@
         <div class="d-flex justify-content-around">
             <h4 class="text-light mr-3">${user.username}</h4>
             <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
+            <form action="<c:url value="/logout"/>" method="post">
+                <input class="fa fa-id-badge" type="submit" value="Logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
         </div>
     </nav>
 </header>
@@ -50,6 +54,6 @@
         </div>
     </div>
 </section>
-<script src="<c:url value="/resources/vendor/jquery-easing/delete-confirmation.js" />"></script>
+<script src="<c:url value="/resources/vendor/jquery-easing/tweet-delete-confirmation.js" />"></script>
 </body>
 </html>

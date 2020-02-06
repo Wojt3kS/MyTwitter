@@ -1,42 +1,42 @@
 package com.mytwitter.controller;
 
 import com.mytwitter.entity.User;
+import com.mytwitter.repository.UserRepository;
 import com.mytwitter.service.CurrentUser;
-import com.mytwitter.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    @GetMapping("/registration")
-    public String registrationForm(Model model){
-        User user = new User();
-        model.addAttribute("user", user);
-        return "/login/registration";
+    @ModelAttribute("user")
+    public User getUser(@AuthenticationPrincipal CurrentUser customUser) {
+        User user = customUser.getUser();
+
+        return user;
     }
 
-    @PostMapping("/registration")
-    public String register(@Valid User user, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("user", user);
-            return "/login/registration";
-        }
-        userService.saveUser(user);
-        return "redirect:/login";
+    @GetMapping("/edit")
+    public String editUser(){
+        return "user/edit";
+    }
+    @PostMapping("/edit")
+    public String saveEditedEmail(@Valid User user, @AuthenticationPrincipal CurrentUser customUser){
+        user.setPassword(customUser.getUser().getPassword());
+        userRepository.save(user);
+        return "redirect:/user/edit";
     }
 }
