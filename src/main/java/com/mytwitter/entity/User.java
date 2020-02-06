@@ -24,7 +24,6 @@ public class User {
     @NotBlank
     private String lastName;
     @Column(nullable = false)
-    @NotBlank
     private String password;
     @Column(nullable = false, unique = true)
     @NotBlank

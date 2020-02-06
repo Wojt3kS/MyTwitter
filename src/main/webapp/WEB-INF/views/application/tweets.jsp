@@ -42,7 +42,6 @@
                     <form:input path="text" size="80"/><br>
                     <form:errors path="text" cssClass="error"/><br>
                     <input type="hidden" name="jspAddress" value="/application/tweets">
-                    <br>
                     <input type="submit" value="Tweet it">
                 </form:form>
             </div>

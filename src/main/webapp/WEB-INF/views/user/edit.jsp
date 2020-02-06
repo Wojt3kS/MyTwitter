@@ -36,18 +36,22 @@
         <div class="m-4 p-4 width-medium">
             <div class="m-4 p-4 border-dashed">
                 <form:form modelAttribute="user" method="post">
-                        <form:input  type="text" id="inputUserame" class="form-control" placeholder="Username"  name="username" path="username"/>
-                        <label for="inputUserame">Username</label><br>
-                        <form:errors path="username" cssClass="error"/>
-                        <form:input type="text" id="inputEmail" class="form-control" placeholder="Email address" required="true" name="email" path="email"/>
-                        <label for="inputEmail">Email address</label><br>
-                        <form:errors path="email" cssClass="error"/>
-                        <form:input type="text" id="inputFirstName" class="form-control" placeholder="First name" required="true" name="firstName" path="firstName"/>
-                        <label for="inputEmail">First name</label><br>
-                        <form:errors path="firstName" cssClass="error"/>
-                        <form:input type="text" id="inputLastName" class="form-control" placeholder="Last name" required="true" name="lastName" path="lastName"/>
-                        <label for="inputEmail">Last name</label><br>
-                        <input type="submit" value="Save">
+                    <label for="inputUserame">Username</label><br>
+                    <form:input type="text" id="inputUserame" class="form-control" placeholder="Username"
+                                required="true" name="username" path="username"/>
+                    <form:errors path="username" cssClass="error"/>
+                    <label for="inputEmail">Email address</label><br>
+                    <form:input type="text" id="inputEmail" class="form-control" placeholder="Email address"
+                                required="true" name="email" path="email"/>
+                    <form:errors path="email" cssClass="error"/>
+                    <label for="inputEmail">First name</label><br>
+                    <form:input type="text" id="inputFirstName" class="form-control" placeholder="First name"
+                                required="true" name="firstName" path="firstName"/>
+                    <form:errors path="firstName" cssClass="error"/>
+                    <label for="inputEmail">Last name</label><br>
+                    <form:input type="text" id="inputLastName" class="form-control" placeholder="Last name"
+                                required="true" name="lastName" path="lastName"/>
+                    <input type="submit" value="Save">
                 </form:form>
             </div>
         </div>

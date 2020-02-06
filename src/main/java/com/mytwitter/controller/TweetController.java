@@ -93,10 +93,11 @@ public class TweetController {
     @PostMapping("/edit")
     public String saveEditedTweet(@AuthenticationPrincipal CurrentUser customUser, @RequestParam String jspAddress,
                                   @Valid Tweet tweet, BindingResult bindingResult, @RequestParam String formattedTime) {
-//        if (bindingResult.hasErrors()) {
-//            System.out.println(bindingResult.getAllErrors().toString());
-//            return "/tweet/edit";
-//        }
+        if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors().toString());
+            tweet.setCreated(LocalDateTime.parse(formattedTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            return "/tweet/edit";
+        }
         tweet.setUser(customUser.getUser());
         tweet.setCreated(LocalDateTime.parse(formattedTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         tweetRepository.save(tweet);

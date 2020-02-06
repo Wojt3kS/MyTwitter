@@ -5,6 +5,7 @@ import com.mytwitter.repository.UserRepository;
 import com.mytwitter.service.CurrentUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,11 +31,16 @@ public class UserController {
     }
 
     @GetMapping("/edit")
-    public String editUser(){
+    public String editUser() {
         return "user/edit";
     }
+
     @PostMapping("/edit")
-    public String saveEditedEmail(@Valid User user, @AuthenticationPrincipal CurrentUser customUser){
+    public String saveEditedEmail(@Valid User user, @AuthenticationPrincipal CurrentUser customUser, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors().toString());
+            return "/user/edit";
+        }
         user.setPassword(customUser.getUser().getPassword());
         userRepository.save(user);
         return "redirect:/user/edit";

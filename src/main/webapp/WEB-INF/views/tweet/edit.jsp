@@ -24,7 +24,7 @@
             <h4 class="text-light mr-3">${user.username}</h4>
             <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
             <form action="<c:url value="/logout"/>" method="post">
-                <input class="fa fa-id-badge" type="submit" value="Logout">
+                <input class="fa fa-id-badge btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4" type="submit" value="Logout">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>
@@ -39,7 +39,7 @@
                     <input type="hidden" name="id" value="${tweet.id}">
                     <input type="hidden" name="formattedTime" value="${tweet.formattedTime}">
                     <form:input path="text" size="80"/><br>
-                    <form:errors path="text" cssClass="error"/>
+                    <form:errors path="text" cssClass="error"/><br>
                     <input type="hidden" name="jspAddress" value="/tweet/${tweet.id}">
                     <input type="submit" value="Tweet it">
                 </form:form>
